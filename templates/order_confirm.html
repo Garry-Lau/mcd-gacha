@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+{% block title %}确认下单 · MCD·GACHA{% endblock %}
+
+{% block content %}
+{% if error %}
+  <section class="panel panel-error">
+    <h1>无法下单</h1>
+    <p class="err-msg">{{ error }}</p>
+    <p class="actions">
+      <a class="btn btn-ghost" href="{{ url_for('gacha') }}">← 回到抽卡台重新选择</a>
+    </p>
+  </section>
+{% else %}
+
+{% set rar = combo.rarity %}
+<section class="order-head">
+  <p class="kicker">第 {{ ids|length }} 件商品 · 组合技已就绪</p>
+  <h1>确认下单</h1>
+  {% if real_order_allowed %}
+    <p class="safe-note safe-danger">
+      ⚠️ 当前为 <strong>live + 已授权</strong> 模式，提交后将向
+      <strong>真实门店发起真实订单</strong>并产生真实费用。
+    </p>
+  {% else %}
+    <p class="safe-note">
+      🛡️ 当前为<strong>演示模式</strong>：提交只写入本地
+      <code>data/orders.json</code>，<strong>不会产生真实订单、不会扣款</strong>。
+    </p>
+  {% endif %}
+</section>
+
+<div class="order-layout">
+  <!-- 左：卡面回顾 -->
+  <section class="panel order-card-panel">
+    <div class="order-card-badge" data-rarity="{{ rar }}">
+      <span class="rarity-badge">{{ rarity_labels.get(rar, rar) }}</span>
+      <span class="score-num">{{ '%.1f'|format(combo.score) }}</span>
+      <span class="score-cap">契合度</span>
+    </div>
+    <h2 class="order-skill">{{ combo.skill_name }}</h2>
+    <p class="order-who">{{ combo.items | map(attribute='name') | join(' + ') }}</p>
+
+    {% if combo.setmeal_name %}
+      <p class="order-setmeal">
+        命中官方套餐 <strong>{{ combo.setmeal_name }}</strong>
+        · 匹配度 <strong>{{ '%.1f'|format(combo.setmeal_ratio * 100) }}%</strong>
+        {%- if combo.missing_items %}（还差 {{ combo.missing_items | join('、') }}）{% endif %}
+      </p>
+    {% endif %}
+
+    <dl class="order-metrics">
+      <div><dt>总热量</dt><dd>{{ combo.total_calories | round(0) | int }} kcal</dd></div>
+      <div><dt>蛋白</dt><dd>{{ combo.total_protein | round(1) }} g</dd></div>
+      <div><dt>脂肪</dt><dd>{{ combo.total_fat | round(1) }} g</dd></div>
+      <div><dt>碳水</dt><dd>{{ combo.total_carb | round(1) }} g</dd></div>
+    </dl>
+    <p class="order-reason">{{ combo.reason }}</p>
+  </section>
+
+  <!-- 右：明细 + 取餐方式 + 提交 -->
+  <section class="panel order-form-panel">
+    <h2>商品明细</h2>
+    <table class="order-table">
+      <thead>
+        <tr><th>商品</th><th>品类</th><th class="num">热量</th><th class="num">单价</th></tr>
+      </thead>
+      <tbody>
+        {% for it in combo.items %}
+          <tr>
+            <td class="name">{{ it.name }}</td>
+            <td><span class="cat-tag">{{ it.category }}</span></td>
+            <td class="num">{{ it.calories | round(0) | int }} kcal</td>
+            <td class="num">¥{{ it.price }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="3" class="num">单点原价</td>
+          <td class="num was">¥{{ combo.total_price }}</td>
+        </tr>
+        <tr>
+          <td colspan="3" class="num">组合技价</td>
+          <td class="num now">¥{{ combo.combo_price }}</td>
+        </tr>
+        {% if combo.saved > 0 %}
+        <tr>
+          <td colspan="3" class="num">共省</td>
+          <td class="num off">¥{{ combo.saved }}</td>
+        </tr>
+        {% endif %}
+      </tfoot>
+    </table>
+
+    {% if combo.setmeal_discount > 0 or combo.coupon_discount > 0 %}
+      <ul class="order-discounts">
+        {% if combo.setmeal_discount > 0 %}
+          <li>官方套餐折价：−¥{{ combo.setmeal_discount }}</li>
+        {% endif %}
+        {% if combo.coupon_discount > 0 %}
+          <li>优惠券免单：−¥{{ combo.coupon_discount }}</li>
+        {% endif %}
+      </ul>
+    {% endif %}
+
+    <h2>取餐方式</h2>
+    <fieldset class="takeway-group" id="takeway-group">
+      {% for w in take_ways %}
+        <label class="takeway-opt">
+          <input type="radio" name="take_way_code" value="{{ w.code }}"
+                 {% if loop.first %}checked{% endif %}>
+          <span class="takeway-title">{{ w.title }}</span>
+          <span class="takeway-sub">{{ w.subtitle }}</span>
+        </label>
+      {% endfor %}
+    </fieldset>
+
+    <dl class="order-store">
+      <div><dt>门店</dt><dd>{{ store_name }}（{{ store_code }}）</dd></div>
+      <div><dt>下单方式</dt><dd>到店自提（orderType=1）</dd></div>
+    </dl>
+
+    <p class="order-err" id="order-err" role="alert"></p>
+
+    <div class="order-actions">
+      <button class="btn btn-primary" id="confirm-btn"
+              data-ids="{{ ids | join(',') }}"
+              data-real="{{ '1' if real_order_allowed else '0' }}">
+        {% if real_order_allowed %}确认下单（真实）{% else %}确认下单（演示）{% endif %}
+      </button>
+      <a class="btn btn-ghost" href="{{ url_for('gacha') }}">返回重抽</a>
+      <a class="btn btn-ghost" href="{{ url_for('orders') }}">看我的订单</a>
+    </div>
+  </section>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/order.js') }}" defer></script>
+{% endblock %}

@@ -1,0 +1,25 @@
+{
+  "_fixture_meta": {
+    "tool": "calculate-price",
+    "args": {
+      "storeCode": "1950970",
+      "orderType": 1,
+      "beType": 1,
+      "items": [
+        { "productCode": "515837", "quantity": 1, "couponId": "8524308B846BBD05A1C5B9068AE52799" }
+      ]
+    },
+    "captured_at": "2026-10-14T16:37:35+08:00",
+    "transport": "MCP mcd-mcp",
+    "content_type": "application/json",
+    "note": "！！！坑已实锤！！！ 只传 couponId、不传 couponCode → 服务端直接报 600010「使用优惠券需要couponId和couponCode」，整个算价请求失败（不是只用原价算）。结论：**couponId 与 couponCode 必须成对传入**，缺一不可；客户端应在调用前做前置校验，避免整单算价失败。",
+    "error_code": 600010
+  },
+  "raw": {
+    "success": false,
+    "code": 600010,
+    "message": "使用优惠券需要couponId和couponCode",
+    "datetime": "2026-10-14 16:37:35",
+    "traceId": "05cfb6917fdb8275ad7bf22818ae99b0"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "_fixture_meta": {
+    "tool": "order-list",
+    "args": {},
+    "captured_at": "2026-10-15T14:23:17+08:00",
+    "transport": "MCP mcd-mcp",
+    "content_type": "application/json",
+    "note": "真实返回（只读工具，无副作用）。结构 / 门店名 / 商品名 / 状态文案均为真实值；**唯一订单号已脱敏**——替换为等长的全零串，避免把真实交易标识写进公开仓库。字段坑点：orderType / beType / orderStatus / realTotalAmount 全是**字符串**，orderStatus 直接就是中文文案（如「订单已完成」），没有数字枚举。",
+    "redacted_fields": ["data.list[].orderId"]
+  },
+  "raw": {
+    "success": true,
+    "code": 200,
+    "message": "请求成功",
+    "datetime": "2026-10-15 14:23:17",
+    "traceId": "4745b9cd32c4f4db7f25720352c24db1",
+    "data": {
+      "list": [
+        {
+          "orderId": "0000000000000000000000000000",
+          "orderType": "1",
+          "createTime": "2026-10-15 09:01:24",
+          "beType": "1",
+          "beCode": "",
+          "storeCode": "1400855",
+          "storeName": "麦当劳广州番禺大道北餐厅(山姆商场内)",
+          "orderStatus": "订单已完成",
+          "orderProductList": [
+            {
+              "productCode": "9900016337",
+              "productName": "大脆鸡扒堡早餐两件套",
+              "quantity": 1,
+              "comboItemList": [
+                { "productCode": "522001", "name": "大脆鸡扒早餐汉堡", "quantity": 1 },
+                { "productCode": "520689", "name": "小杯鲜萃咖啡", "quantity": 1 }
+              ]
+            }
+          ],
+          "realTotalAmount": "0"
+        }
+      ]
+    }
+  }
+}

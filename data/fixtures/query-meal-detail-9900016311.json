@@ -1,0 +1,33 @@
+{
+  "_fixture_meta": {
+    "tool": "query-meal-detail",
+    "args": { "storeCode": "1950970", "orderType": 1, "beType": 1, "code": "9900016311" },
+    "captured_at": "2026-10-14T16:54:31+08:00",
+    "transport": "MCP mcd-mcp",
+    "content_type": "application/json",
+    "note": "四件套：主堡 + 小食 + 小食 + 饮料。默认组成 龙焰鸡腿堡(521952) / 中薯条(4810) / 麦乐鸡4块(515106) / 可乐中杯(3050)。其中 521952 与 515106 不在 query-meals 门店菜单，故只有 薯条/可乐 可解析进卡池。",
+    "omitted": "各轮备选项（龙焰芝士棒鸡腿堡 +¥3、麦旋风系列、脆皮鸡系列等）与 modification 特调树"
+  },
+  "raw": {
+    "success": true,
+    "code": 200,
+    "message": "请求成功",
+    "datetime": "2026-10-14 16:54:31",
+    "traceId": "7c9ab57a77a3fb1efb523c71b9878afa",
+    "data": {
+      "code": "9900016311",
+      "name": "龙焰美味四件套",
+      "supportModify": false,
+      "rounds": [
+        { "id": 1, "name": "选择主食", "quantity": 1, "maxQuantity": 1, "minQuantity": 1, "_omitted_choices_count": 1,
+          "choices": [{ "code": "521952", "name": "龙焰鸡腿堡", "quantity": 1, "isDefault": 1, "diffPrice": "+ ¥0" }] },
+        { "id": 2, "name": "小食", "quantity": 1, "maxQuantity": 1, "minQuantity": 1, "_omitted_choices_count": 8,
+          "choices": [{ "code": "4810", "name": "中薯条", "quantity": 1, "isDefault": 1, "diffPrice": "+ ¥0" }] },
+        { "id": 3, "name": "小食", "quantity": 1, "maxQuantity": 1, "minQuantity": 1, "_omitted_choices_count": 11,
+          "choices": [{ "code": "515106", "name": "麦乐鸡4块", "quantity": 1, "isDefault": 1, "diffPrice": "+ ¥0" }] },
+        { "id": 4, "name": "选择套餐内饮料", "quantity": 1, "maxQuantity": 1, "minQuantity": 1, "_omitted_choices_count": 24,
+          "choices": [{ "code": "3050", "name": "可乐中杯", "quantity": 1, "isDefault": 1, "diffPrice": "+ ¥0" }] }
+      ]
+    }
+  }
+}

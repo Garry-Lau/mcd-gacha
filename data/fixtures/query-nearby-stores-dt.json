@@ -1,0 +1,24 @@
+{
+  "_fixture_meta": {
+    "tool": "query-nearby-stores",
+    "args": { "beType": 5, "searchType": 2, "city": "北京", "keyword": "麦当劳" },
+    "captured_at": "2026-10-14T16:37:37+08:00",
+    "transport": "MCP mcd-mcp",
+    "content_type": "application/json",
+    "note": "beType=5（得来速/Drive Through）与 beType=1 的关键差异：返回的门店**带 beCode**（形如 storeCode+'41'），后续 query-meals / calculate-price / create-order 必须携带该 beCode。到店自提(beType=1)则**不能传** beCode，传了会报错。"
+  },
+  "raw": {
+    "success": true,
+    "code": 200,
+    "message": "请求成功",
+    "datetime": "2026-10-14 16:37:37",
+    "traceId": "b994e1d6b7636d46bbd4ff2724898a30",
+    "data": [
+      { "storeCode": "1950202", "beCode": "195020241", "storeName": "北京祈年大街得来速餐厅", "address": "东打磨厂街7号一层西南侧010340A商铺", "distance": 1578, "businessStatus": true, "businessStartTime": "06:00", "businessEndTime": "22:00", "longitude": 0.0, "latitude": 0.0, "reservation": true, "reservationTimeOptions": [] },
+      { "storeCode": "1950936", "beCode": "195093641", "storeName": "北京朝阳公园南路得来速餐厅", "address": "朝阳公园南路1号南大门区5号1幢", "distance": 5282, "businessStatus": true, "businessStartTime": "06:30", "businessEndTime": "23:00", "longitude": 0.0, "latitude": 0.0, "reservation": true, "reservationTimeOptions": [] },
+      { "storeCode": "1950176", "beCode": "195017641", "storeName": "北京健德桥得来速餐厅", "address": "祁家豁子甲２号南院地块", "distance": 8751, "businessStatus": true, "businessStartTime": "00:00", "businessEndTime": "23:59", "longitude": 0.0, "latitude": 0.0, "reservation": true, "reservationTimeOptions": [] },
+      { "storeCode": "1950122", "beCode": "195012241", "storeName": "北京朝阳路得来速餐厅", "address": "朝阳路６９号１号楼", "distance": 8875, "businessStatus": true, "businessStartTime": "00:00", "businessEndTime": "23:59", "longitude": 0.0, "latitude": 0.0, "reservation": true, "reservationTimeOptions": [] },
+      { "storeCode": "1950823", "beCode": "195082341", "storeName": "北京西马场路得来速餐厅", "address": "永外大红门西马场甲14号集美家居2幢6119号商铺", "distance": 8948, "businessStatus": true, "businessStartTime": "06:30", "businessEndTime": "23:00", "longitude": 0.0, "latitude": 0.0, "reservation": true, "reservationTimeOptions": [] }
+    ]
+  }
+}

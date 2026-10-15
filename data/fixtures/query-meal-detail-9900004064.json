@@ -1,0 +1,31 @@
+{
+  "_fixture_meta": {
+    "tool": "query-meal-detail",
+    "args": { "storeCode": "1950970", "orderType": 1, "beType": 1, "code": "9900004064" },
+    "captured_at": "2026-10-14T16:54:32+08:00",
+    "transport": "MCP mcd-mcp",
+    "content_type": "application/json",
+    "note": "套餐默认组成（isDefault=1）。主堡是「板烧鸡腿堡」(1406)；备选主食含 巨无霸 +¥2 / 麦辣鸡腿汉堡 -¥1 等。每轮只保留默认项。",
+    "omitted": "各轮备选项（4 个主食备选 + 4 个小食备选 + 24 个饮料备选）与 modification 特调树"
+  },
+  "raw": {
+    "success": true,
+    "code": 200,
+    "message": "请求成功",
+    "datetime": "2026-10-14 16:54:32",
+    "traceId": "b424aaa113b78dd2c08ae89765e83ba1",
+    "data": {
+      "code": "9900004064",
+      "name": "精选单人餐三件套",
+      "supportModify": false,
+      "rounds": [
+        { "id": 1, "name": "主食任意选", "quantity": 1, "maxQuantity": 1, "minQuantity": 1, "_omitted_choices_count": 4,
+          "choices": [{ "code": "1406", "name": "板烧鸡腿堡", "quantity": 1, "isDefault": 1, "diffPrice": "+ ¥0" }] },
+        { "id": 2, "name": "选择套餐内小食", "quantity": 1, "maxQuantity": 1, "minQuantity": 1, "_omitted_choices_count": 4,
+          "choices": [{ "code": "4810", "name": "中薯条", "quantity": 1, "isDefault": 1, "diffPrice": "+ ¥0" }] },
+        { "id": 3, "name": "选择套餐内饮料", "quantity": 1, "maxQuantity": 1, "minQuantity": 1, "_omitted_choices_count": 24,
+          "choices": [{ "code": "3050", "name": "可乐中杯", "quantity": 1, "isDefault": 1, "diffPrice": "+ ¥0" }] }
+      ]
+    }
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "_fixture_meta": {
+    "tool": "ERRORS",
+    "captured_at": "2026-10-14T16:37:13~16:38:00+08:00",
+    "transport": "MCP mcd-mcp",
+    "note": "阶段 0 探测过程中的**全部异常样本汇总**。统一约定：success=false 时 code 为业务错误码，message 为可直接展示的中文原因。所有错误都是 HTTP 200 + 业务错误码，客户端不能只看 HTTP 状态。",
+    "error_code_table": {
+      "400": "请求的数据格式错误 / 参数格式校验失败",
+      "499": "下游接口调用失败 / 业务拦截（如积分不足）",
+      "600010": "检查必填参数 / 使用优惠券需要couponId和couponCode",
+      "600020": "配送地址不存在",
+      "600058": "城市名或者关键词不能为空（query-nearby-stores, searchType=2）",
+      "610303": "订单号不存在",
+      "610501": "仅支持企业团餐场景下使用助餐服务",
+      "510001": "积分不足（mall-create-order）",
+      "5100003": "库存不足（mall-create-order）",
+      "5100011": "用户触发限购（mall-create-order）",
+      "56300002": "卡券兑换失败（mall-create-order）"
+    }
+  },
+  "samples": [
+    {
+      "id": "nearby-stores-missing-keyword",
+      "tool": "query-nearby-stores",
+      "args": { "beType": 1, "searchType": 2, "city": "北京" },
+      "raw": { "success": false, "code": 600058, "message": "城市名或者关键词不能为空", "datetime": "2026-10-14 16:37:35", "traceId": "6c3a7a12ac4bae2b6ca15e26b8a0f905" },
+      "conclusion": "searchType=2 时 city 与 keyword 必须同时传。"
+    },
+    {
+      "id": "delivery-query-stores-bad-address",
+      "tool": "delivery-query-stores",
+      "args": { "addressId": "12345", "beType": 2 },
+      "raw": { "success": false, "code": 600020, "message": "配送地址不存在", "datetime": "2026-10-14 16:37:36", "traceId": "c07622994ad7772ab27a40804e455850" },
+      "conclusion": "外送链路必须先有 delivery-query-addresses 返回的真实 addressId；本账号地址列表为空（见 delivery-query-addresses.json），外送链路无法跑通，本项目以「到店自提」为主链路。"
+    },
+    {
+      "id": "create-order-empty-items",
+      "tool": "create-order",
+      "args": { "storeCode": "1950970", "orderType": 1, "beType": 1, "items": [] },
+      "raw": { "success": false, "code": 600010, "message": "检查必填参数", "datetime": "2026-10-14 16:37:50", "traceId": "ba5db719ab7ab3c7ab560737ba1d974e" },
+      "conclusion": "故意用空 items 探测校验分支，**未创建任何真实订单**。真实下单还需 orderType=1 时必传 takeWayCode。"
+    },
+    {
+      "id": "cancel-order-not-found",
+      "tool": "cancel-order",
+      "args": { "orderId": "TEST_ORDER_0001", "cancelReasonCode": "1" },
+      "raw": { "success": false, "code": 610303, "message": "订单号不存在！", "datetime": "2026-10-14 16:37:50", "traceId": "e648fb882afad44f02f42c375c86d3a1" }
+    },
+    {
+      "id": "query-order-not-found",
+      "tool": "query-order",
+      "args": { "orderId": "TEST_ORDER_0001" },
+      "raw": { "success": false, "code": 610303, "message": "订单号不存在！", "datetime": "2026-10-14 16:37:50", "traceId": "f5bf5faba30bc18a352ebee9a1e1b409" }
+    },
+    {
+      "id": "query-survey-coupon-downstream",
+      "tool": "query-survey-coupon",
+      "args": { "orderId": "TEST_ORDER_0001" },
+      "raw": { "success": false, "code": 499, "message": "下游接口调用失败", "datetime": "2026-10-14 16:37:50", "traceId": "ee5c3a30378392acc2af6ae4661f388f" },
+      "conclusion": "上游订单不存在时，该接口返回的是 499（下游失败）而非 610303，错误码不统一。"
+    },
+    {
+      "id": "meal-assistance-wrong-betype",
+      "tool": "query-meal-assistance",
+      "args": { "storeCode": "1950970", "orderType": 1, "beType": 6 },
+      "raw": { "success": false, "code": 610501, "message": "仅支持企业团餐场景下使用助餐服务", "datetime": "2026-10-14 16:37:35", "traceId": "610a6d242c0574cfb240eb52f775c1f2" },
+      "conclusion": "beType 传 6 也不够 —— 该接口还要求 orderType=2 且必须先由 delivery-query-stores 拿到真实 beCode。团餐链路本账号不可用。"
+    },
+    {
+      "id": "mall-create-order-points-not-enough",
+      "tool": "mall-create-order",
+      "args": { "skuId": 17787, "spuCategory": "1", "count": 1 },
+      "raw": { "success": false, "code": 499, "message": "积分不足", "datetime": "2026-10-14 16:37:58", "traceId": "97284c480138fbeea650a6ab59a567ac" },
+      "conclusion": "该 SKU 需 800 积分，账户仅 159.9。**这是预期内的失败**，用它安全地探到了 mall-create-order 的错误结构，未产生真实兑换。"
+    },
+    {
+      "id": "delivery-create-address-bad-phone",
+      "tool": "delivery-create-address",
+      "args": { "city": "北京市", "contactName": "集成测试", "gender": "先生", "phone": "123", "address": "测试地址", "addressDetail": "测试门牌" },
+      "raw": { "success": false, "code": 400, "message": "phone请输入正确的手机号格式", "datetime": "2026-10-14 16:38:00", "traceId": "3a1d70fba4840d22cfc49734db410b1f" },
+      "conclusion": "故意用非法手机号探测校验分支，**未创建任何真实地址**。手机号须为 11 位、以 1 开头。"
+    },
+    {
+      "id": "party-order-create-bad-params",
+      "tool": "party-order-create",
+      "args": { "partyType": 1 },
+      "raw": { "success": false, "code": 400, "message": "请求的数据格式错误", "datetime": "2026-10-14 16:37:58", "traceId": "c5e6203291cbae60213bfc1bd67f191e" }
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "_meta": {
+    "note": "本地演示订单。demo 模式下的下单只落盘到这里，不会产生任何真实交易。",
+    "count": 1
+  },
+  "orders": [
+    {
+      "order_id": "DEMO20261015154858001",
+      "created_at": "2026-10-15 15:48:58",
+      "store_code": "1950970",
+      "store_name": "麦当劳北京中粮广场餐厅",
+      "take_way_code": "take-in-store",
+      "take_way_label": "外带",
+      "status": "待取餐",
+      "lines": [
+        {
+          "product_code": "4810",
+          "name": "薯条",
+          "price": "13.5",
+          "quantity": 1,
+          "calories": 289.0
+        },
+        {
+          "product_code": "515837",
+          "name": "圆筒冰淇淋",
+          "price": "5",
+          "quantity": 1,
+          "calories": 93.0
+        }
+      ],
+      "original_price": "18.5",
+      "pay_amount": "9.33",
+      "saved": "9.17",
+      "saved_pct": 0.4957,
+      "total_calories": 382.0,
+      "item_count": 2,
+      "rarity": "R",
+      "score": 62.5,
+      "skill_name": "碳水炸弹·双人份",
+      "setmeal_id": "9900005456",
+      "setmeal_name": "麦辣鸡腿汉堡三件套",
+      "setmeal_ratio_pct": 33.3,
+      "coupon_ids": [
+        "8524308B846BBD05A1C5B9068AE52799"
+      ],
+      "source": "demo",
+      "is_demo": true,
+      "trace_id": "0000000000000000000000000000000000"
+    }
+  ]
+}

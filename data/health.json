@@ -1,0 +1,66 @@
+{
+  "_meta": {
+    "provider": "mock",
+    "note": "演示数据（非真实手表数据）。真实接入见 services/health.py。",
+    "generated_days": 7,
+    "retention_days": 90
+  },
+  "records": [
+    {
+      "date": "2026-10-08",
+      "calories": 2355.0,
+      "steps": 13202,
+      "active_minutes": 44,
+      "source": "mock"
+    },
+    {
+      "date": "2026-10-09",
+      "calories": 2580.0,
+      "steps": 11217,
+      "active_minutes": 45,
+      "source": "mock"
+    },
+    {
+      "date": "2026-10-10",
+      "calories": 2491.0,
+      "steps": 11965,
+      "active_minutes": 35,
+      "source": "mock"
+    },
+    {
+      "date": "2026-10-11",
+      "calories": 2363.0,
+      "steps": 11923,
+      "active_minutes": 44,
+      "source": "mock"
+    },
+    {
+      "date": "2026-10-12",
+      "calories": 2356.0,
+      "steps": 11198,
+      "active_minutes": 33,
+      "source": "mock"
+    },
+    {
+      "date": "2026-10-13",
+      "calories": 2293.0,
+      "steps": 10392,
+      "active_minutes": 49,
+      "source": "mock"
+    },
+    {
+      "date": "2026-10-14",
+      "calories": 2492.0,
+      "steps": 11436,
+      "active_minutes": 51,
+      "source": "mock"
+    },
+    {
+      "date": "2026-10-15",
+      "calories": 2586.0,
+      "steps": 7307,
+      "active_minutes": 83,
+      "source": "mock"
+    }
+  ]
+}

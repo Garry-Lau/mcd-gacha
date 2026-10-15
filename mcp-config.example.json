@@ -1,0 +1,31 @@
+{
+  "_comment": [
+    "mcd-gacha · MCP 服务器配置示例。本文件内全部是【占位符】，仓库中不含任何真实 Token / Key。",
+    "",
+    "用法：把 mcpServers 里的条目合并进你的 MCP 客户端配置文件（WorkBuddy 为 ~/.workbuddy/mcp.json），",
+    "然后填入真实值。把 command/args 换成你已授权的 mcd-mcp 服务器启动方式；",
+    "token 请只从环境变量注入，不要写死在文件里。",
+    "本文件的 _comment 键在标准 MCP 客户端里会被忽略，复制 mcpServers 部分即可。",
+    "",
+    "注意：本项目的 --demo 模式完全不读本文件，也不需要任何 MCP 服务器。",
+    "",
+    "本项目在 --live 模式下只读以下 4 个工具，全部为只读查询：",
+    "  query-store-coupons  → 门店券（唯一同时返回 couponId + couponCode + products 的接口）",
+    "  query-meals          → 菜单与价格（商品编码 + 价格的唯一来源）",
+    "  list-nutrition-foods → 营养成分表（自定义伪表格字符串，非 JSON）",
+    "  query-meal-detail    → 官方套餐的默认组成（解析「套餐匹配度」用）",
+    "",
+    "以下有真实副作用的工具在本项目中被【硬隔离】，任何模式都不会调用：",
+    "  auto-bind-coupons / create-order / cancel-order / mall-create-order /",
+    "  delivery-create-address / party-order-create / draw-lottery"
+  ],
+  "mcpServers": {
+    "mcd-mcp": {
+      "command": "REPLACE_WITH_YOUR_MCD_MCP_LAUNCH_COMMAND",
+      "args": [],
+      "env": {
+        "MCD_MCP_TOKEN": "REPLACE_WITH_YOUR_TOKEN"
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "_fixture_meta": {
+    "tool": "available-coupons",
+    "args": {},
+    "captured_at": "2026-10-14T16:37:13+08:00",
+    "transport": "MCP mcd-mcp",
+    "content_type": "text/markdown (非 JSON!)",
+    "note": "！！！结构陷阱！！！ 该接口【不返回 JSON】，而是返回 Markdown 文本。可用信息只有【券标题 + 状态 + 图片】。**没有** couponId、couponCode、门槛金额(threshold)、优惠金额(discount)、适用范围(applicable_items)、有效期(expire_at)。因此：本接口只能用于「发现有哪些可领的券」，真正拿到 couponId/couponCode/适用商品必须靠 auto-bind-coupons（领取）或 query-my-coupons / query-store-coupons。",
+    "coupon_titles": ["中薯条买一送一", "王牌小食拼", "巧克力味厚松饼猪柳蛋套餐", "免费脆薯饼", "人气麦旋风买一送一", "9.9元中杯冰美式"]
+  },
+  "raw_markdown": "### 麦麦省优惠券列表：\n- 优惠券标题：中薯条买一送一 \\\n  状态：可领取 \\\n  优惠券图片：\\\n    <img src=\"https://img.mcd.cn/cms/images/88890902eaa7a54d.png\" alt=\"中薯条买一送一\" height=\"auto\" width=\"300\">\n- 优惠券标题：王牌小食拼 \\\n  状态：可领取 \\\n  优惠券图片：\\\n    <img src=\"https://img.mcd.cn/cms/images/aa3889c989d54b0d.png\" alt=\"王牌小食拼\" height=\"auto\" width=\"300\">\n- 优惠券标题：巧克力味厚松饼猪柳蛋套餐 \\\n  状态：可领取 \\\n  优惠券图片：\\\n    <img src=\"https://img.mcd.cn/cms/images/89616dc45f21dd90.png\" alt=\"巧克力味厚松饼猪柳蛋套餐\" height=\"auto\" width=\"300\">\n- 优惠券标题：免费脆薯饼 \\\n  状态：可领取 \\\n  优惠券图片：\\\n    <img src=\"https://mcd-portal-prod-cos1-1300270282.cos.ap-shanghai.myqcloud.com/campaign/prod/campaign-offer/coupon/0295cb54d2e24f4daba91b7b7a5a3dd5/%E5%85%8D%E8%B4%B9%E8%84%86%E8%96%AF%E9%A5%BC600.png\" alt=\"免费脆薯饼\" height=\"auto\" width=\"300\">\n- 优惠券标题：人气麦旋风买一送一 \\\n  状态：可领取 \\\n  优惠券图片：\\\n    <img src=\"https://mcd-portal-prod-cos1-1300270282.cos.ap-shanghai.myqcloud.com/campaign/prod/campaign-offer/coupon/2af16d7ed29b4797ab3b29cf4eaecdbf/600x600.png\" alt=\"人气麦旋风买一送一\" height=\"auto\" width=\"300\">\n- 优惠券标题：9.9元中杯冰美式 \\\n  状态：可领取 \\\n  优惠券图片：\\\n    <img src=\"https://mcd-portal-prod-cos1-1300270282.cos.ap-shanghai.myqcloud.com/campaign/prod/campaign-offer/coupon/66a5597fe23246e698d9d63be003a951/9.9%E5%86%B0%E7%BE%8E%E5%BC%8F%E5%88%B8%E5%9B%BE600X600_compressed.png\" alt=\"9.9元中杯冰美式\" height=\"auto\" width=\"300\">\n"
+}

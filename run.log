@@ -1,0 +1,33 @@
+[mcd-gacha] 模式 = demo  定时任务 = delegated  http://127.0.0.1:5000/
+ * Serving Flask app 'app'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://127.0.0.1:5000
+Press CTRL+C to quit
+127.0.0.1 - - [15/Oct/2026 15:48:43] "GET /gacha HTTP/1.1" 200 -
+127.0.0.1 - - [15/Oct/2026 15:48:43] "GET /static/js/gacha.js HTTP/1.1" 304 -
+127.0.0.1 - - [15/Oct/2026 15:48:43] "GET /static/css/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [15/Oct/2026 15:48:43] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [15/Oct/2026 15:48:46] "POST /api/recommend HTTP/1.1" 200 -
+127.0.0.1 - - [15/Oct/2026 15:48:49] "GET /order/new?ids=4810,515837&sm=9900005456 HTTP/1.1" 200 -
+127.0.0.1 - - [15/Oct/2026 15:48:49] "GET /static/css/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [15/Oct/2026 15:48:50] "GET /static/js/order.js HTTP/1.1" 200 -
+127.0.0.1 - - [15/Oct/2026 15:48:50] "GET /static/js/gacha.js HTTP/1.1" 304 -
+127.0.0.1 - - [15/Oct/2026 15:48:58] "POST /api/order HTTP/1.1" 200 -
+127.0.0.1 - - [15/Oct/2026 15:48:58] "GET /orders HTTP/1.1" 200 -
+127.0.0.1 - - [15/Oct/2026 15:48:58] "GET /static/css/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [15/Oct/2026 15:48:58] "GET /static/js/gacha.js HTTP/1.1" 304 -
+127.0.0.1 - - [15/Oct/2026 15:49:10] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [15/Oct/2026 15:49:10] "GET /static/css/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [15/Oct/2026 15:49:10] "GET /static/js/gacha.js HTTP/1.1" 304 -
+127.0.0.1 - - [15/Oct/2026 15:49:10] "GET /gacha HTTP/1.1" 200 -
+127.0.0.1 - - [15/Oct/2026 15:49:11] "GET /static/css/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [15/Oct/2026 15:49:11] "GET /static/js/gacha.js HTTP/1.1" 304 -
+127.0.0.1 - - [15/Oct/2026 15:49:11] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [15/Oct/2026 15:49:12] "GET /orders HTTP/1.1" 200 -
+127.0.0.1 - - [15/Oct/2026 15:49:12] "GET /static/css/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [15/Oct/2026 15:49:12] "GET /static/js/gacha.js HTTP/1.1" 304 -
+127.0.0.1 - - [15/Oct/2026 16:20:25] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [15/Oct/2026 16:20:25] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [15/Oct/2026 16:20:25] "GET /static/css/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [15/Oct/2026 16:20:25] "GET /static/js/gacha.js HTTP/1.1" 304 -

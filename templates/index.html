@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block title %}填写画像 · MCD·GACHA{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <p class="eyebrow">STEP 01 / 02</p>
+  <h1 class="hero-title">
+    先把你的<em>热量预算</em>算出来
+  </h1>
+  <p class="hero-sub">
+    身高体重 → 基础代谢 → 结合智能手表日均消耗 → 得到目标热量。
+    随后在卡池里勾选想吃的单品，系统会把它们组合成「组合技」。
+  </p>
+  <ul class="hero-stats">
+    <li><b>{{ catalog_size }}</b><span>可选单品</span></li>
+    <li><b>{{ setmeal_size }}</b><span>官方套餐</span></li>
+    <li><b>{{ coupon_size }}</b><span>优惠券</span></li>
+  </ul>
+</section>
+
+<form class="panel form" method="post" action="{{ url_for('post_profile') }}">
+  <h2 class="panel-title">你的画像</h2>
+
+  <div class="field-row">
+    <label class="field">
+      <span class="field-label">性别</span>
+      <select name="gender">
+        <option value="male" {% if profile.gender == 'male' %}selected{% endif %}>男</option>
+        <option value="female" {% if profile.gender == 'female' %}selected{% endif %}>女</option>
+      </select>
+    </label>
+
+    <label class="field">
+      <span class="field-label">年龄</span>
+      <input type="number" name="age" min="10" max="100" step="1" value="{{ profile.age|int }}" required>
+    </label>
+  </div>
+
+  <div class="field-row">
+    <label class="field">
+      <span class="field-label">身高 <i>cm</i></span>
+      <input type="number" name="height" min="100" max="250" step="0.5"
+             value="{{ profile.height_cm }}" required>
+    </label>
+
+    <label class="field">
+      <span class="field-label">体重 <i>kg</i></span>
+      <input type="number" name="weight" min="30" max="300" step="0.1"
+             value="{{ profile.weight_kg }}" required>
+    </label>
+  </div>
+
+  <label class="field">
+    <span class="field-label">活动强度</span>
+    <select name="activity">
+      {% for key, label in activities.items() %}
+      <option value="{{ key }}" {% if profile.activity == key %}selected{% endif %}>{{ label }}</option>
+      {% endfor %}
+    </select>
+  </label>
+
+  <label class="field">
+    <span class="field-label">这顿的定位</span>
+    <select name="meal_share">
+      {% for key, label in meal_shares.items() %}
+      <option value="{{ key }}"
+        {% if profile.meal_share == (0.25 if key == 'meal_small' else (0.45 if key == 'meal_big' else 0.35)) %}selected{% endif %}>
+        {{ label }}
+      </option>
+      {% endfor %}
+    </select>
+    <span class="field-hint">
+      抽卡结果是一份组合（约一餐量级），所以按「日预算 × 餐次占比」折算成单餐预算来匹配热量。
+    </span>
+  </label>
+
+  <label class="field">
+    <span class="field-label">门店城市</span>
+    <input type="text" name="city" value="{{ profile.city }}" placeholder="北京">
+    <span class="field-hint">demo 固定使用门店 1950970（北京中粮广场）的菜单与价格。</span>
+  </label>
+
+  <button class="btn btn-primary btn-lg" type="submit">生成我的热量预算 →</button>
+</form>
+{% endblock %}

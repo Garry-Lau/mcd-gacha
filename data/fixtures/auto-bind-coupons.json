@@ -1,0 +1,20 @@
+{
+  "_fixture_meta": {
+    "tool": "auto-bind-coupons",
+    "args": {},
+    "captured_at": "2026-10-14T16:37:35+08:00",
+    "transport": "MCP mcd-mcp",
+    "content_type": "text/markdown (非 JSON)",
+    "note": "这是**真正能把 couponId + couponCode 拿到手**的接口。返回 Markdown，但结构化程度可接受（每张券 3 行：标题 / couponId / couponCode / 图片）。它是「写操作」（会自动领取全部可领券），demo 模式下绝对不能调用，必须走本地 fixture。",
+    "parsed_coupons": [
+      { "title": "中薯条买一送一", "couponId": "8692944B045928451618BFF22F535D2A", "couponCode": "MCD6X78W720090J7J0101", "type": "BOGO" },
+      { "title": "王牌小食拼", "couponId": "E05F6BFB4BAFAA5DB44B233583BFE711", "couponCode": "MCD6793010JK0X9005W21", "type": "COMBO" },
+      { "title": "巧克力味厚松饼猪柳蛋套餐", "couponId": "7390AF213CDB886D86C7A4785237A4B7", "couponCode": "MCD60JW09507L1027071X", "type": "SET" },
+      { "title": "巧克力味厚松饼猪柳蛋套餐", "couponId": "B34BB3A364F39940475B7BA80D19310A", "couponCode": "MCD6X9WJ00M1168272000", "type": "SET" },
+      { "title": "免费脆薯饼", "couponId": "0D94B7923332F58026539DB8CCA81275", "couponCode": "MCD601049X10W23907N0J", "type": "FREE" },
+      { "title": "人气麦旋风买一送一", "couponId": "AEB58D9A8FC3603F35AA3E0E4AEB89D2", "couponCode": "MCD60W7PJ17290X700601", "type": "BOGO" },
+      { "title": "9.9元中杯冰美式", "couponId": "264B97DBE02BE6CF996AA6914151C4A9", "couponCode": "MCD61006P01X20091JW75", "type": "PRICE" }
+    ]
+  },
+  "raw_markdown": "### 领券结果\n\n总计: 7 张优惠券\n成功: 7 张\n失败: 0 张\n\n---\n\n#### 成功领取的优惠券：\n\n- 中薯条买一送一\n  - couponId：8692944B045928451618BFF22F535D2A\n  - couponCode：MCD6X78W720090J7J0101\n- 王牌小食拼\n  - couponId：E05F6BFB4BAFAA5DB44B233583BFE711\n  - couponCode：MCD6793010JK0X9005W21\n- 巧克力味厚松饼猪柳蛋套餐\n  - couponId：7390AF213CDB886D86C7A4785237A4B7\n  - couponCode：MCD60JW09507L1027071X\n- 巧克力味厚松饼猪柳蛋套餐\n  - couponId：B34BB3A364F39940475B7BA80D19310A\n  - couponCode：MCD6X9WJ00M1168272000\n- 免费脆薯饼\n  - couponId：0D94B7923332F58026539DB8CCA81275\n  - couponCode：MCD601049X10W23907N0J\n- 人气麦旋风买一送一\n  - couponId：AEB58D9A8FC3603F35AA3E0E4AEB89D2\n  - couponCode：MCD60W7PJ17290X700601\n- 9.9元中杯冰美式\n  - couponId：264B97DBE02BE6CF996AA6914151C4A9\n  - couponCode：MCD61006P01X20091JW75\n"
+}

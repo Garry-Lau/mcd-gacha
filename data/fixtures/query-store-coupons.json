@@ -1,0 +1,29 @@
+{
+  "_fixture_meta": {
+    "tool": "query-store-coupons",
+    "args": { "storeCode": "1950970", "orderType": 1, "beType": 1 },
+    "captured_at": "2026-10-14T16:37:22+08:00",
+    "transport": "MCP mcd-mcp",
+    "content_type": "application/json",
+    "note": "这是**唯一**能同时拿到 couponId + couponCode + 适用商品编码的券接口。返回体前半段是 Markdown 字段说明，真正的 JSON 在最后（本 fixture 已抽取 data 部分）。tradeDateTime 是 '开始-结束' 的单个字符串，需要自己 split。products[].productCode 才是「适用商品」的可判定字段。"
+  },
+  "raw": {
+    "success": true,
+    "code": 200,
+    "message": "请求成功",
+    "datetime": "2026-10-14 16:37:22",
+    "traceId": "a83322adf4ce4009311d89018c8426a8",
+    "data": [
+      {
+        "title": "圆筒冰淇淋10次卡",
+        "couponId": "8524308B846BBD05A1C5B9068AE52799",
+        "couponCode": "MCD6WV10110800H9023P6",
+        "tradeDateTime": "2026-10-07 00:00:00-2026-11-06 23:59:59",
+        "products": [
+          { "productCode": "515837", "productName": "圆筒冰淇淋" }
+        ],
+        "promotionId": "112464009"
+      }
+    ]
+  }
+}

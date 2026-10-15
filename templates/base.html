@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>{% block title %}MCD·GACHA 热量抽卡{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="bg-aurora" aria-hidden="true"></div>
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <a class="brand" href="{{ url_for('index') }}">
+      <span class="brand-mark">M</span>
+      <span class="brand-text">
+        MCD·GACHA
+        <em>热量抽卡 · 组合技推荐</em>
+      </span>
+    </a>
+    <nav class="topnav">
+      <a class="navlink" href="{{ url_for('index') }}">画像</a>
+      <a class="navlink" href="{{ url_for('gacha') }}">抽卡台</a>
+      <a class="navlink" href="{{ url_for('orders') }}">订单</a>
+      <span class="pill pill-demo" id="mode-pill" title="智能手表数据为模拟数据">演示数据</span>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="foot">
+    <p>
+      本站为 2026 麦当劳 1024 程序员创意开发大赛参赛作品。
+      营养与价格数据取自麦当劳 MCP 真实返回；
+      <strong>智能手表热量消耗为模拟数据</strong>（<code>MockHealthProvider</code>），
+      不代表任何真实用户体征。
+    </p>
+    <p class="foot-safe">
+      <strong>下单安全说明</strong>：demo 模式下的「下单」只写入本地
+      <code>data/orders.json</code>，<strong>不会产生任何真实订单、不扣款</strong>。
+      要真实下单必须显式设置 <code>MCD_ALLOW_REAL_ORDER=1</code> 并切到 live 模式。
+    </p>
+  </footer>
+
+  <script>window.MCD = { demo: {{ 'false' if real_order_allowed else 'true' }} };</script>
+  <script src="{{ url_for('static', filename='js/gacha.js') }}" defer></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

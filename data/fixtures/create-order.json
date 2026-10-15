@@ -1,0 +1,39 @@
+{
+  "_fixture_meta": {
+    "tool": "create-order",
+    "args": {
+      "storeCode": "1950970",
+      "orderType": 1,
+      "beType": 1,
+      "takeWayCode": "take-in-store",
+      "items": [{ "productCode": "<单品编码>", "quantity": 1 }]
+    },
+    "captured_at": null,
+    "transport": "MCP mcd-mcp（本项目从未实际调用此工具）",
+    "content_type": "application/json",
+    "synthesized": true,
+    "note": "⚠️ **这不是真实抓取，是按接口结构合成的演示骨架。** 原因：create-order 会立即产生**真实订单与真实费用**，本项目在 demo 与开发阶段均未执行真实下单（阶段 0 只用空 items 探过参数校验分支，见 errors.json 的 create-order-empty-items）。字段命名对齐已实测的 order-list 真实结构。demo 模式下 data.orderId / data.realTotalAmount / data.createTime / datetime 由客户端按**本次请求**填充，只落盘到本地 data/orders.json，不产生任何真实交易。",
+    "required_args": ["storeCode", "orderType", "beType", "items"],
+    "conditional_args": { "takeWayCode": "orderType=1（到店自提）时必传；取值来自 calculate-price 返回的 takeWayList[].code" }
+  },
+  "raw": {
+    "success": true,
+    "code": 200,
+    "message": "请求成功",
+    "datetime": "1970-01-01 00:00:00",
+    "traceId": "0000000000000000000000000000000000",
+    "data": {
+      "orderId": "",
+      "orderStatus": "待取餐",
+      "orderType": "1",
+      "beType": "1",
+      "storeCode": "1950970",
+      "storeName": "麦当劳北京中粮广场餐厅",
+      "beCode": "",
+      "takeWayCode": "take-in-store",
+      "realTotalAmount": "0",
+      "createTime": "1970-01-01 00:00:00",
+      "orderProductList": []
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "_fixture_meta": {
+    "tool": "query-party-store + query-party-store-date + query-party-store-session + query-party-city",
+    "args": {
+      "query-party-city": { "spuId": 1065 },
+      "query-party-store": { "code": "310100", "latitude": 31.230525, "longitude": 121.473667, "spuId": 1065 },
+      "query-party-store-date": { "spuId": 1065, "storeCode": "1950970" },
+      "query-party-store-session": { "spuId": 1065, "storeCode": "1950970", "dateStr": "2026-10-20" }
+    },
+    "captured_at": "2026-10-14T16:37:36~16:38:00+08:00",
+    "transport": "MCP mcd-mcp",
+    "content_type": "application/json",
+    "note": "派对链路四连查询。**query-party-city 忽略 spuId**，直接把全国 390+ 个城市全量返回（实测），必须前端自己做城市选择，不要指望按 spuId 过滤。query-party-store 需要 cityCode + 经纬度 + spuId。这三段链路与本项目「套餐抽卡」主玩法无关，仅探测记录，不进入推荐算法。",
+    "truncation_note": "query-party-city 返回 390+ 城市，此处保留 3 条；query-party-store 返回 130+ 门店，此处保留 2 条。"
+  },
+  "query_party_city": {
+    "raw": {
+      "success": true, "code": 200, "message": "请求成功",
+      "data": [
+        { "code": 110100, "latitude": 39.904179, "longitude": 116.407387, "name": "北京市", "initial": "B", "sortNo": 27 },
+        { "code": 310100, "latitude": 31.230525, "longitude": 121.473667, "name": "上海市", "initial": "S", "sortNo": 258 },
+        { "code": 440300, "latitude": 22.543527, "longitude": 114.057939, "name": "深圳市", "initial": "S", "sortNo": 264 }
+      ]
+    }
+  },
+  "query_party_store": {
+    "raw": {
+      "success": true, "code": 200, "message": "请求成功",
+      "data": [
+        { "address": "南京东路街道西藏中路336号", "cityCode": "310100", "cityName": "上海市", "latitude": 31.233774, "longitude": 121.475816, "name": "麦当劳上海黄浦华旭国际大厦餐厅", "shortName": "上海黄浦华旭国际大厦餐厅", "code": "1450713", "distance": 415, "distanceText": "415m", "businessStatus": 1, "onlineBusinessStatus": true },
+        { "address": "湖滨路168号商场_B2-W08_", "cityCode": "310100", "cityName": "上海市", "latitude": 31.220618, "longitude": 121.477721, "name": "麦当劳上海黄浦区无限极荟餐厅", "shortName": "上海黄浦区无限极荟餐厅", "code": "1450699", "distance": 1166, "distanceText": "1.2km", "businessStatus": 1, "onlineBusinessStatus": true }
+      ]
+    }
+  },
+  "query_party_store_date": {
+    "raw": { "success": true, "code": 200, "message": "请求成功", "data": [] },
+    "observation": "用北京门店 storeCode=1950970 查上海 spu=1065 的可预约日期，返回空数组 —— 说明该 spu 在北京中粮广场店无可预约日期。链路本身调用成功。"
+  },
+  "query_party_store_session": {
+    "raw": {
+      "success": true, "code": 200, "message": "请求成功",
+      "data": [
+        { "id": 37008081, "timeStart": "12:00", "timeEnd": "13:30", "partyMin": 5, "partyMax": 12, "price": 4500, "cookEmpNo": "", "opEmpNo": "", "rgmEmpNo": "10001191", "leftNum": 12 },
+        { "id": 37013050, "timeStart": "18:30", "timeEnd": "20:00", "partyMin": 5, "partyMax": 12, "price": 4500, "cookEmpNo": "", "opEmpNo": "", "rgmEmpNo": "10001191", "leftNum": 12 }
+      ]
+    },
+    "observation": "price 单位是【分】（4500 = 45 元）。即使 date 接口返回空，session 接口仍能返回场次 —— 两个接口的数据源不一致，不可互相依赖做空值判断。"
+  }
+}

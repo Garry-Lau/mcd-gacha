@@ -1,0 +1,11 @@
+{
+  "_fixture_meta": {
+    "tool": "query-my-coupons",
+    "args": {},
+    "captured_at": "2026-10-14T16:37:13+08:00",
+    "transport": "MCP mcd-mcp",
+    "content_type": "text/markdown (非 JSON)",
+    "note": "同样返回 Markdown。与 query-store-coupons 的区别：本接口返回的是卡包里的券，**不校验门店/渠道/配送方式**，不承诺可用于当前订单。返回字段只有 券名 / 用券价格 / 有效期 / 标签，**同样没有 couponId 和 couponCode**，所以也不能直接用于 calculate-price。"
+  },
+  "raw_markdown": "# 您的优惠券列表\n\n共 1 张可用优惠券 | 第 1/1 页 | 每页 200 条\n\n## 圆筒冰淇淋10次卡\n- **优惠**: ¥0 (用券价格)\n- **有效期**: 2026-10-07 00:00-2026-11-06 23:59 10:30-23:59\n- **领取时间**: 7日前收到\n- **标签**: 到店专用\n\n<img src=\"https://mcd-portal-prod-cos1-1300270282.cos.ap-shanghai.myqcloud.com/campaign/prod/campaign-offer/coupon/a2a4e2b5f6044e54bc39994e6556e792/%E5%9C%86%E7%AD%92%E5%86%B0%E6%B7%87%E6%B7%8B10%E6%AC%A1%E5%8D%A1.jpg\" alt=\"圆筒冰淇淋10次卡\" height=\"auto\" width=\"300\">\n"
+}

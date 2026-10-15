@@ -1,0 +1,30 @@
+{
+  "_fixture_meta": {
+    "tool": "now-time-info",
+    "args": {},
+    "captured_at": "2026-10-14T16:37:13+08:00",
+    "transport": "MCP mcd-mcp",
+    "content_type": "application/json",
+    "note": "真实返回。注意：data.timestamp 为毫秒级。"
+  },
+  "raw": {
+    "success": true,
+    "code": 200,
+    "message": "请求成功",
+    "datetime": "2026-10-14 16:37:13",
+    "traceId": "f5f9a11858cc1c8097bc0e734a97108a",
+    "data": {
+      "timestamp": 1791967033214,
+      "datetime": "2026-10-14T16:37:13.214",
+      "formatted": "2026-10-14 16:37:13",
+      "date": "2026-10-14",
+      "year": 2026,
+      "month": 10,
+      "day": 14,
+      "dayOfWeek": "WEDNESDAY",
+      "timezone": "GMT+08:00",
+      "offset": "+08:00",
+      "utc": "2026-10-14T08:37:13.214Z"
+    }
+  }
+}

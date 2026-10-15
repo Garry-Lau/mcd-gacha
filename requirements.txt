@@ -1,0 +1,13 @@
+# mcd-gacha 运行依赖
+# 安装： pip install -r requirements.txt
+# 一行跑通（离线 demo）： python app.py --demo
+
+Flask>=3.0,<4.0
+APScheduler>=3.10,<4.0
+
+# 测试
+pytest>=8.0
+
+# 可选：真实 MCP 模式（--demo 不需要）
+# 若要通过 stdio 连接麦当劳 MCP 服务器，取消下面这行注释
+# mcp>=1.2

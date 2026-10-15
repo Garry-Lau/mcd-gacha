@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block title %}我的订单 · MCD·GACHA{% endblock %}
+
+{% block content %}
+<section class="orders-head">
+  <p class="kicker">抽卡成功的组合技会留档在这里</p>
+  <h1>我的订单</h1>
+  {% if real_order_allowed %}
+    <p class="safe-note safe-danger">⚠️ live + 已授权真实下单模式。</p>
+  {% else %}
+    <p class="safe-note">
+      🛡️ 演示模式：下列订单保存在本地 <code>{{ orders_path }}</code>，
+      <strong>不存在任何真实交易</strong>。
+    </p>
+  {% endif %}
+</section>
+
+{% if not orders %}
+  <section class="panel empty-orders">
+    <p class="empty-mark">🃏</p>
+    <h2>还没有订单</h2>
+    <p>去抽卡台选几件想吃的，抽到满意的组合技后点击卡片即可下单。</p>
+    <p class="actions">
+      <a class="btn btn-primary" href="{{ url_for('gacha') }}">去抽卡 →</a>
+    </p>
+  </section>
+{% else %}
+  <p class="orders-count">共 <strong>{{ orders | length }}</strong> 笔订单</p>
+
+  <div class="orders-grid">
+    {% for o in orders %}
+      <article class="order-item" data-rarity="{{ o.rarity }}">
+        <header class="oi-head">
+          <span class="oi-rarity">{{ rarity_labels.get(o.rarity, o.rarity) }}</span>
+          <span class="oi-id" title="订单号">{{ o.order_id }}</span>
+        </header>
+
+        <h2 class="oi-skill">{{ o.skill_name }}</h2>
+        <p class="oi-who">
+          {% for l in o.lines %}{{ l.name }}{% if not loop.last %} + {% endif %}{% endfor %}
+        </p>
+
+        {% if o.setmeal_name %}
+          <p class="oi-setmeal">
+            命中 {{ o.setmeal_name }} · 匹配度 {{ '%.1f'|format(o.setmeal_ratio_pct) }}%
+          </p>
+        {% endif %}
+
+        <dl class="oi-meta">
+          <div><dt>下单时间</dt><dd>{{ o.created_at }}</dd></div>
+          <div><dt>门店</dt><dd>{{ o.store_name }}</dd></div>
+          <div><dt>取餐</dt><dd>{{ o.take_way_label }}</dd></div>
+          <div><dt>热量</dt><dd>{{ o.total_calories | round(0) | int }} kcal · {{ o.item_count }} 件</dd></div>
+        </dl>
+
+        <div class="oi-price">
+          <span class="was">原价 ¥{{ o.original_price }}</span>
+          <span class="now">¥{{ o.pay_amount }}</span>
+          {% if o.saved > 0 %}
+            <span class="off">省 ¥{{ o.saved }}</span>
+          {% endif %}
+        </div>
+
+        <footer class="oi-foot">
+          <span class="oi-status">{{ o.status }}</span>
+          {% if o.is_demo %}<span class="oi-demo">演示订单</span>{% endif %}
+        </footer>
+      </article>
+    {% endfor %}
+  </div>
+{% endif %}
+
+{% if real_orders %}
+  <section class="real-orders">
+    <h2>账号真实历史订单（只读）</h2>
+    <p class="hint">来自 MCP <code>order-list</code> 工具，与上面的演示订单无关。</p>
+    <ul class="real-list">
+      {% for r in real_orders %}
+        <li>
+          <span class="ro-name">
+            {% for p in r.orderProductList or [] %}{{ p.productName }}{% if not loop.last %}、{% endif %}{% endfor %}
+          </span>
+          <span class="ro-store">{{ r.storeName }}</span>
+          <span class="ro-time">{{ r.createTime }}</span>
+          <span class="ro-status">{{ r.orderStatus }}</span>
+        </li>
+      {% endfor %}
+    </ul>
+  </section>
+{% endif %}
+{% endblock %}

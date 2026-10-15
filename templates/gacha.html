@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+{% block title %}抽卡台 · MCD·GACHA{% endblock %}
+
+{% block content %}
+<section class="hero hero-compact">
+  <p class="eyebrow">STEP 02 / 02</p>
+  <h1 class="hero-title">今天的<em>组合技</em>是？</h1>
+  <p class="hero-sub">
+    在卡池里勾选 {{ min_items }}~{{ max_items }} 件想吃的，点「抽卡」。
+    系统会枚举你勾选的所有组合，按热量 / 蛋白 / 脂肪 / 优惠 / 品类完整度五个维度打分，
+    再叠加「官方套餐匹配度」加成，只保留 50 分以上的结果。
+  </p>
+</section>
+
+{# ---------------- 热量预算 ---------------- #}
+<section class="panel budget">
+  <h2 class="panel-title">热量预算</h2>
+  <div class="budget-main">
+    <div class="budget-hero">
+      <span class="budget-num">{{ budget.meal_target|round|int }}</span>
+      <span class="budget-unit">kcal / 这顿</span>
+    </div>
+    <dl class="budget-grid">
+      <div><dt>日预算</dt><dd>{{ budget.target|round|int }} kcal</dd></div>
+      <div><dt>目标</dt><dd>{{ budget.goal_label }}</dd></div>
+      <div><dt>BMI</dt><dd>{{ budget.bmi|round(1) }}</dd></div>
+      <div><dt>BMR</dt><dd>{{ budget.bmr|round|int }}</dd></div>
+      <div><dt>TDEE</dt><dd>{{ budget.tdee|round|int }}</dd></div>
+      <div><dt>依据</dt><dd>{{ budget.basis_label }}</dd></div>
+    </dl>
+  </div>
+  <p class="budget-watch">
+    <span class="tag tag-demo">演示数据</span>
+    近 {{ burns|length }} 天日均消耗 <b>{{ budget.watch_average|round|int }}</b> kcal
+    （模拟智能手表 · <code>MockHealthProvider</code>）
+    {% if budget.basis == 'watch' %}
+    → 已<strong>优先</strong>用该数据作为 TDEE
+    {% else %}
+    → 无有效手表数据，回落公式估算
+    {% endif %}
+  </p>
+</section>
+
+{# ---------------- 套餐（套餐优惠） ---------------- #}
+<section class="panel">
+  <h2 class="panel-title">官方套餐 <small>勾到套餐里的单品会触发「套餐匹配度」</small></h2>
+  <div class="strip">
+    {% for sm in set_meals %}
+    <article class="setmeal-card">
+      <h3>{{ sm.name }}</h3>
+      <p class="setmeal-price">
+        <b>¥{{ sm.price }}</b>
+        <del>¥{{ sm.original_price }}</del>
+        <span class="save">省 {{ sm.saving }}</span>
+      </p>
+      <ul class="setmeal-comp">
+        {% for c in sm.components %}
+        <li class="{% if not c.food_id %}comp-missing{% endif %}" title="{% if not c.food_id %}该商品不在门店菜单，无法补齐{% endif %}">
+          {{ c.name }}{% if not c.food_id %}<i>（菜单外）</i>{% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+{# ---------------- 优惠券 ---------------- #}
+<section class="panel">
+  <h2 class="panel-title">可用优惠券 <small>券与门店匹配，以门店券为准</small></h2>
+  <div class="strip">
+    {% for c in coupons %}
+    <article class="coupon-card {% if c.usable %}coupon-usable{% else %}coupon-info{% endif %}">
+      <span class="coupon-src">{{ '门店券' if c.source == 'store' else '可领取' }}</span>
+      <h3>{{ c.title }}</h3>
+      {% if c.expire_at %}<p class="coupon-exp">有效期至 {{ c.expire_at }}</p>{% endif %}
+      {% if not c.usable %}
+      <p class="coupon-note">仅展示（该接口不返回 couponCode，无法参与算价）</p>
+      {% endif %}
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+{# ---------------- 卡池 ---------------- #}
+<form id="pool-form">
+  <section class="panel">
+    <h2 class="panel-title">卡池 <small>按品类分组 · 选中的卡会发光</small></h2>
+    {% for cat in categories %}
+    <div class="cat-block">
+      <h3 class="cat-title">{{ cat }} <em>{{ grouped[cat]|length }} 张</em></h3>
+      <div class="pool">
+        {% for item in grouped[cat] %}
+        <button class="pool-card" type="button" aria-pressed="false"
+                data-id="{{ item.id }}" data-name="{{ item.name }}"
+                data-cal="{{ item.calories|round|int }}" data-cat="{{ item.category }}">
+          <span class="pool-cat">{{ item.category }}</span>
+          <span class="pool-name">{{ item.name }}</span>
+          <span class="pool-cal"><b>{{ item.calories|round|int }}</b><i>kcal</i></span>
+          <span class="pool-price">¥{{ item.price }}</span>
+          <span class="pool-macros">
+            P{{ item.protein|round|int }} · F{{ item.fat|round|int }} · C{{ item.carb|round|int }}
+          </span>
+          <span class="pool-check" aria-hidden="true"></span>
+        </button>
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+  </section>
+</form>
+
+{# ---------------- 抽卡动作条 ---------------- #}
+<div class="actionbar" id="actionbar">
+  <div class="actionbar-info">
+    <span class="picked"><b id="picked-count">0</b> / {{ max_items }} 已选</span>
+    <span class="picked-cal" id="picked-cal">0 kcal</span>
+    <span class="picked-err" id="picked-err" role="alert"></span>
+  </div>
+  <button class="btn btn-gacha" id="draw-btn" type="button" disabled>
+    <span class="btn-gacha-icon" aria-hidden="true">◆</span> 抽 卡
+  </button>
+</div>
+
+{# ---------------- 结果层 ---------------- #}
+<div class="result-layer" id="result-layer" hidden>
+  <div class="result-sheet" role="dialog" aria-modal="true" aria-label="抽卡结果">
+    <header class="result-head">
+      <h2>抽卡结果</h2>
+      <p id="result-meta" class="result-meta"></p>
+      <button class="btn btn-ghost" id="close-result" type="button">返回卡池</button>
+    </header>
+
+    <div class="result-grid" id="result-grid"></div>
+
+    <section class="upgrade-block" id="upgrade-block" hidden>
+      <h3>补齐建议 <small>再点几件就能凑满套餐，拿到套餐价</small></h3>
+      <div class="result-grid result-grid-sm" id="upgrade-grid"></div>
+    </section>
+  </div>
+</div>
+
+<template id="tpl-card">
+  <article class="result-card">
+    <div class="card-inner">
+      <div class="card-face card-back">
+        <span class="card-back-mark">?</span>
+      </div>
+      <div class="card-face card-front">
+        <span class="rarity-badge"></span>
+        <h3 class="card-skill"></h3>
+        <p class="card-who"></p>
+        <ul class="card-items"></ul>
+        <div class="card-stats"></div>
+        <p class="card-setmeal"></p>
+        <p class="card-reason"></p>
+        <div class="card-price"></div>
+        <span class="card-cta" aria-hidden="true">点击此卡下单 →</span>
+      </div>
+    </div>
+    <span class="halo" aria-hidden="true"></span>
+    <span class="sparks" aria-hidden="true"></span>
+  </article>
+</template>
+{% endblock %}

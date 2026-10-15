@@ -1,0 +1,43 @@
+{
+  "_fixture_meta": {
+    "tool": "calculate-price",
+    "args": {
+      "storeCode": "1950970",
+      "orderType": 1,
+      "beType": 1,
+      "items": [
+        {
+          "productCode": "515837",
+          "quantity": 1,
+          "couponId": "8524308B846BBD05A1C5B9068AE52799",
+          "couponCode": "MCD6WV10110800H9023P6"
+        }
+      ]
+    },
+    "captured_at": "2026-10-14T16:37:35+08:00",
+    "transport": "MCP mcd-mcp",
+    "content_type": "application/json",
+    "note": "couponId + couponCode 【成对出现】时调用成功。价格单位为【分】。此单 price=0 是因为「圆筒冰淇淋10次卡」本身就是 0 元券，是正确结果，不是 bug。takeWayList 是后续 create-order 必传 takeWayCode 的来源。园筒冰淇淋原价 5 元，但 productOriginalPrice 也是 0 —— 说明**当使用券时，服务端会把该项计入券，原价字段不再反映单品原价**，推荐算法算「优惠覆盖度」时不要依赖这个字段。"
+  },
+  "raw": {
+    "success": true,
+    "code": 200,
+    "message": "请求成功",
+    "datetime": "2026-10-14 16:37:35",
+    "traceId": "c828ff70882837e84afe3fb9d81a95bf",
+    "data": {
+      "productOriginalPrice": 0,
+      "productPrice": 0,
+      "originalPrice": 0,
+      "discount": 0,
+      "price": 0,
+      "productList": [
+        { "productCode": "515837", "productName": "圆筒冰淇淋", "quantity": 1, "originalSubtotal": 0, "subtotal": 0 }
+      ],
+      "takeWayList": [
+        { "code": "eat-in", "title": "堂食", "subtitle": "店内用餐" },
+        { "code": "take-in-store", "title": "外带", "subtitle": "店内自提" }
+      ]
+    }
+  }
+}

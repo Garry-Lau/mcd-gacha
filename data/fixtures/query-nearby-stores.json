@@ -1,0 +1,96 @@
+{
+  "_fixture_meta": {
+    "tool": "query-nearby-stores",
+    "args": { "beType": 1, "searchType": 2, "city": "北京", "keyword": "麦当劳" },
+    "captured_at": "2026-10-14T16:37:13+08:00",
+    "transport": "MCP mcd-mcp",
+    "content_type": "application/json",
+    "note": "searchType=2 时 city 和 keyword **必须同时传**（已实测：只传 city 会报 600058「城市名或者关键词不能为空」）。beType=1（到店自提）返回的门店**没有 beCode**；beType=5（得来速）返回的门店**有 beCode**（见 query-nearby-stores-dt.json）。longitude/latitude 恒为 0.0，不要用它算距离，用 distance 字段（单位：米）。"
+  },
+  "raw": {
+    "success": true,
+    "code": 200,
+    "message": "请求成功",
+    "datetime": "2026-10-14 16:37:13",
+    "traceId": "b3b3e4076256b8e67437fc833985a3e3",
+    "data": [
+      {
+        "storeCode": "1950970",
+        "storeName": "麦当劳北京中粮广场餐厅",
+        "address": "建国门内大街8号北京中粮广场C座G138-141",
+        "distance": 29,
+        "businessStatus": true,
+        "businessStartTime": "07:00",
+        "businessEndTime": "22:00",
+        "longitude": 0.0,
+        "latitude": 0.0,
+        "reservation": true,
+        "reservationTimeOptions": [
+          { "date": "2026-10-14", "today": true, "reservationOptionText": "下午茶(14:44至16:45)，夜市(17:14至21:45)" },
+          { "date": "2026-10-15", "today": false, "reservationOptionText": "早餐(07:14至10:15)，午餐(10:44至14:15)，下午茶(14:44至16:45)，夜市(17:14至21:45)" }
+        ]
+      },
+      {
+        "storeCode": "1951029",
+        "storeName": "麦当劳北京北京站北广场餐厅",
+        "address": "北京火车站北广场bjz-3-16-2号商铺（送货前务必电话联系）",
+        "distance": 406,
+        "businessStatus": true,
+        "businessStartTime": "07:00",
+        "businessEndTime": "21:00",
+        "longitude": 0.0,
+        "latitude": 0.0,
+        "reservation": false,
+        "reservationTimeOptions": []
+      },
+      {
+        "storeCode": "1950035",
+        "storeName": "麦当劳北京建国门餐厅",
+        "address": "建外大街24号底商麦当劳",
+        "distance": 827,
+        "businessStatus": true,
+        "businessStartTime": "06:00",
+        "businessEndTime": "22:00",
+        "longitude": 0.0,
+        "latitude": 0.0,
+        "reservation": true,
+        "reservationTimeOptions": [
+          { "date": "2026-10-14", "today": true, "reservationOptionText": "下午茶(14:44至16:45)，夜市(17:14至21:45)" },
+          { "date": "2026-10-15", "today": false, "reservationOptionText": "早餐(06:14至10:15)，午餐(10:44至14:15)，下午茶(14:44至16:45)，夜市(17:14至21:45)" }
+        ]
+      },
+      {
+        "storeCode": "1951035",
+        "storeName": "麦当劳北京东单北大街餐厅",
+        "address": "东单北大街112、114号",
+        "distance": 1031,
+        "businessStatus": true,
+        "businessStartTime": "06:30",
+        "businessEndTime": "22:30",
+        "longitude": 0.0,
+        "latitude": 0.0,
+        "reservation": true,
+        "reservationTimeOptions": [
+          { "date": "2026-10-14", "today": true, "reservationOptionText": "下午茶(14:44至16:45)，夜市(17:14至21:45)，宵夜(22:14至22:16)" },
+          { "date": "2026-10-15", "today": false, "reservationOptionText": "早餐(06:44至10:15)，午餐(10:44至14:15)，下午茶(14:44至16:45)，夜市(17:14至21:45)，宵夜(22:14至22:16)" }
+        ]
+      },
+      {
+        "storeCode": "1950973",
+        "storeName": "麦当劳北京雅宝路餐厅",
+        "address": "雅宝路7号1号楼1层C101商铺",
+        "distance": 1155,
+        "businessStatus": true,
+        "businessStartTime": "07:00",
+        "businessEndTime": "23:00",
+        "longitude": 0.0,
+        "latitude": 0.0,
+        "reservation": true,
+        "reservationTimeOptions": [
+          { "date": "2026-10-14", "today": true, "reservationOptionText": "下午茶(14:44至16:45)，夜市(17:14至21:45)，宵夜(22:14至22:46)" },
+          { "date": "2026-10-15", "today": false, "reservationOptionText": "早餐(07:14至10:15)，午餐(10:44至14:15)，下午茶(14:44至16:45)，夜市(17:14至21:45)，宵夜(22:14至22:46)" }
+        ]
+      }
+    ]
+  }
+}

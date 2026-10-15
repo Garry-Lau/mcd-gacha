@@ -1,0 +1,31 @@
+{
+  "_fixture_meta": {
+    "tool": "query-meal-detail",
+    "args": { "storeCode": "1950970", "orderType": 1, "beType": 1, "code": "9900005449" },
+    "captured_at": "2026-10-14T16:54:32+08:00",
+    "transport": "MCP mcd-mcp",
+    "content_type": "application/json",
+    "note": "套餐默认组成（isDefault=1）。每轮只保留默认项，省略 modification 特调树 / image。主堡「吉士汉堡包」编码 1010 不在 query-meals 门店菜单里，因此该套餐只有 薯条/可乐 两项可被解析为卡池商品。",
+    "omitted": "各轮备选项与 modification 特调树"
+  },
+  "raw": {
+    "success": true,
+    "code": 200,
+    "message": "请求成功",
+    "datetime": "2026-10-14 16:54:32",
+    "traceId": "738533dea04b8a3a45bec1326faead55",
+    "data": {
+      "code": "9900005449",
+      "name": "吉士汉堡包中套餐",
+      "supportModify": false,
+      "rounds": [
+        { "id": 1, "name": "吉士汉堡包", "quantity": 1, "maxQuantity": 1, "minQuantity": 1,
+          "choices": [{ "code": "1010", "name": "吉士汉堡包", "quantity": 1, "isDefault": 1, "diffPrice": "+ ¥0" }] },
+        { "id": 2, "name": "选择套餐内小食", "quantity": 1, "maxQuantity": 1, "minQuantity": 1, "_omitted_choices_count": 4,
+          "choices": [{ "code": "4810", "name": "中薯条", "quantity": 1, "isDefault": 1, "diffPrice": "+ ¥0" }] },
+        { "id": 3, "name": "选择套餐内饮料", "quantity": 1, "maxQuantity": 1, "minQuantity": 1, "_omitted_choices_count": 24,
+          "choices": [{ "code": "3050", "name": "可乐中杯", "quantity": 1, "isDefault": 1, "diffPrice": "+ ¥0" }] }
+      ]
+    }
+  }
+}

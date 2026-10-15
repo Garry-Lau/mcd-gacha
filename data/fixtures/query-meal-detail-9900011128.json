@@ -1,0 +1,33 @@
+{
+  "_fixture_meta": {
+    "tool": "query-meal-detail",
+    "args": { "storeCode": "1950970", "orderType": 1, "beType": 1, "code": "9900011128" },
+    "captured_at": "2026-10-14T16:54:31+08:00",
+    "transport": "MCP mcd-mcp",
+    "content_type": "application/json",
+    "note": "500 大卡套餐之一。默认组成 汉堡包(1000) / 麦乐鸡4块(515106) / 苹果片一袋60g(6102) / 无糖可口可乐中杯(3071)。只有 苹果片 能解析进卡池，因此这个套餐在 demo 里匹配度上限很低——保留它是为了覆盖「低匹配度」这一档。",
+    "omitted": "饮料备选项与 modification 特调树"
+  },
+  "raw": {
+    "success": true,
+    "code": 200,
+    "message": "请求成功",
+    "datetime": "2026-10-14 16:54:31",
+    "traceId": "ce1b8bf904ffad70996923f99448c95a",
+    "data": {
+      "code": "9900011128",
+      "name": "“堡”你欢乐套餐",
+      "supportModify": false,
+      "rounds": [
+        { "id": 1, "name": "汉堡包", "quantity": 1, "maxQuantity": 1, "minQuantity": 1,
+          "choices": [{ "code": "1000", "name": "汉堡包", "quantity": 1, "isDefault": 1, "diffPrice": "+ ¥0" }] },
+        { "id": 2, "name": "麦乐鸡4块", "quantity": 1, "maxQuantity": 1, "minQuantity": 1,
+          "choices": [{ "code": "515106", "name": "麦乐鸡4块", "quantity": 1, "isDefault": 1, "diffPrice": "+ ¥0" }] },
+        { "id": 3, "name": "苹果片一袋(60g)", "quantity": 1, "maxQuantity": 1, "minQuantity": 1,
+          "choices": [{ "code": "6102", "name": "苹果片一袋(60g)", "quantity": 1, "isDefault": 1, "diffPrice": "+ ¥0" }] },
+        { "id": 4, "name": "选择饮料", "quantity": 1, "maxQuantity": 1, "minQuantity": 1, "_omitted_choices_count": 5,
+          "choices": [{ "code": "3071", "name": "无糖可口可乐中杯", "quantity": 1, "isDefault": 1, "diffPrice": "+ ¥0" }] }
+      ]
+    }
+  }
+}

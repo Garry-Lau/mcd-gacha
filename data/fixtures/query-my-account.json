@@ -1,0 +1,29 @@
+{
+  "_fixture_meta": {
+    "tool": "query-my-account",
+    "args": {},
+    "captured_at": "2026-10-14T16:37:22+08:00",
+    "transport": "MCP mcd-mcp",
+    "content_type": "application/json",
+    "note": "积分账户。注意：所有积分字段都是**字符串**（如 \"159.9\"），且可用积分带小数。预算约束如需用积分抵扣，记得转 Decimal/float。"
+  },
+  "raw": {
+    "success": true,
+    "code": 200,
+    "message": "请求成功",
+    "datetime": "2026-10-14 16:37:22",
+    "traceId": "a20a8d15ee6cdc22d52a148e4a6863cc",
+    "data": {
+      "availablePoint": "159.9",
+      "accountId": "02000460288996659739072100476",
+      "accumulativePoint": "159.9",
+      "currency": "麦享会积分",
+      "currentMouthExpirePoint": "0",
+      "expiredPoint": "0",
+      "frozenPoint": "0",
+      "lastMouthExpirePoint": "0",
+      "nextMouthExpirePoint": "0",
+      "usedPoint": "0"
+    }
+  }
+}

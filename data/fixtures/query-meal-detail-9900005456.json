@@ -1,0 +1,31 @@
+{
+  "_fixture_meta": {
+    "tool": "query-meal-detail",
+    "args": { "storeCode": "1950970", "orderType": 1, "beType": 1, "code": "9900005456" },
+    "captured_at": "2026-10-14T16:54:31+08:00",
+    "transport": "MCP mcd-mcp",
+    "content_type": "application/json",
+    "note": "套餐默认组成（isDefault=1 的 choice）。为控制体积，每轮只保留默认项，并省略 modification 特调树 / image —— 这两部分与推荐算法无关。",
+    "omitted": "各轮备选项（大薯条 +¥2.5、脆脆薯条 +¥2.5、其他饮料约 24 项）与 modification 特调树"
+  },
+  "raw": {
+    "success": true,
+    "code": 200,
+    "message": "请求成功",
+    "datetime": "2026-10-14 16:54:31",
+    "traceId": "0c7f56f1ea3b9e9fabae8e4f7bc99432",
+    "data": {
+      "code": "9900005456",
+      "name": "麦辣鸡腿汉堡三件套",
+      "supportModify": false,
+      "rounds": [
+        { "id": 1, "name": "麦辣鸡腿汉堡", "quantity": 1, "maxQuantity": 1, "minQuantity": 1,
+          "choices": [{ "code": "1440", "name": "麦辣鸡腿汉堡", "quantity": 1, "isDefault": 1, "diffPrice": "+ ¥0" }] },
+        { "id": 2, "name": "选择套餐内小食", "quantity": 1, "maxQuantity": 1, "minQuantity": 1, "_omitted_choices_count": 4,
+          "choices": [{ "code": "4810", "name": "中薯条", "quantity": 1, "isDefault": 1, "diffPrice": "+ ¥0" }] },
+        { "id": 3, "name": "选择套餐内饮料", "quantity": 1, "maxQuantity": 1, "minQuantity": 1, "_omitted_choices_count": 24,
+          "choices": [{ "code": "3050", "name": "可乐中杯", "quantity": 1, "isDefault": 1, "diffPrice": "+ ¥0" }] }
+      ]
+    }
+  }
+}
